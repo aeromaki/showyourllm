@@ -4,8 +4,11 @@
 }
 
 .info h3:first-child {
-    font-size: 25px;
     margin-top: 20px;
+}
+
+.info:last-child {
+    margin-bottom: 20px;
 }
 
 .info-text {

@@ -1,4 +1,4 @@
-import './style.css';
+// import styles from './style.module.css';
 import { useState } from "react";
 import RowContainer from "./RowContainer";
 import InfoContainer from "./InfoContainer";

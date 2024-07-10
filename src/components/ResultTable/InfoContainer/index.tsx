@@ -1,4 +1,7 @@
-import './style.css';
+import _styles0 from '../ResultTable.module.css';
+import _styles1 from './style.module.css';
+const styles = { ..._styles0, ..._styles1 };
+
 import { useEffect, useRef } from "react";
 import { ViewResult, RowInfo } from "../../../types";
 
@@ -13,7 +16,7 @@ export default function InfoContainer<T>({ row, RowInfo }: {
   }, [row]);
 
   return (
-    <div ref={ref} className='info-container container'>
+    <div ref={ref} className={`${styles["info-container"]} ${styles.container}`}>
       {row != undefined ?
         <RowInfo row={row} /> :
         <>select row</>

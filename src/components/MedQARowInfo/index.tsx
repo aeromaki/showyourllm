@@ -1,10 +1,10 @@
-import './style.css';
+import styles from './style.module.css';
 import { RowInfo, MedQAViewResult } from "../../types";
 
 
 function MedQARowInfoText({ text }: { text: string[] }) {
   return (
-    <div className='info-text'>
+    <div className={styles['info-text']}>
       {text.map((l, i) =>
         <p key={i} style={{
           textDecoration:
@@ -29,7 +29,7 @@ function MedQARowInfoOptions({ options }: {
   const idxs: ("A" | "B" | "C" | "D" | "E")[]
     = ["A", "B", "C", "D", "E"];
   return (
-    <table className='info-options'>
+    <table className={styles['info-options']}>
       <tbody>
         <>{
           idxs.map(i => (
@@ -46,21 +46,21 @@ function MedQARowInfoOptions({ options }: {
 
 const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAViewResult }) {
   return (
-    <div className='info'>
+    <div className={styles['info']}>
       <h3>Question</h3>
       <MedQARowInfoText text={row.Q} />
 
       <h3>Options</h3>
       <MedQARowInfoOptions options={row.As} />
 
-      <table className='label-and-prediction'>
+      <table className={styles['label-and-prediction']}>
         <tbody>
           <tr>
-            <th className='minitable-th'>
+            <th className={styles['minitable-th']}>
               <h3>Label</h3>
               <p>{row.A0}</p>
             </th>
-            <th className='minitable-th'>
+            <th className={styles['minitable-th']}>
               <h3>Prediction</h3>
               <p style={{
                 color: row.A0 == row.Am ? "green" : "red"
