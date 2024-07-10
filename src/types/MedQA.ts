@@ -1,4 +1,4 @@
-import { ViewResult } from "./container";
+import { ViewResult } from "./ResultTable";
 
 export type MedQAPredictionIndex = "A" | "B" | "C" | "D" | "E" | string;
 export type MedQAViewResult = ViewResult & {
@@ -17,4 +17,4 @@ export type MedQAViewResult = ViewResult & {
     E: string
   }
   reasoning: string[]
-}
+};
