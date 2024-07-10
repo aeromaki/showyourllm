@@ -1,5 +1,6 @@
+import './style.css';
 import { useState, useEffect, useRef } from 'react';
-import { Index, SetIndex, ViewResult } from '../types'
+import { Index, SetIndex, ViewResult } from '../../../types'
 
 function Row({ row, index, setIndex }: {
   row: ViewResult,
@@ -43,22 +44,22 @@ function Row({ row, index, setIndex }: {
   return (
     <div
       ref={ref}
-      className='result flex-row prevent-select'
+      className='row flex-row prevent-select'
       style={rowStyle}
       onClick={() => setIndex(row.id)}
     >
       <div
-        className='result-index'
+        className='row-index'
         style={borderRightStyle}
       >{row.id}</div>
       <div
-        className='result-correctness' style={{
+        className='row-correctness' style={{
           color: correctnessColor,
           borderColor: borderRightStyle?.borderColor
         }}>
         {row.correctness ? 'T' : 'F'}
       </div>
-      <div className='result-q' title="">{row.display}</div>
+      <div className='row-q' title="">{row.display}</div>
     </div>
   )
 }
@@ -105,7 +106,7 @@ export default function RowContainer<T>({ results, index, setIndex }: {
   }, []);
 
   return (
-    <div className='result-container'>
+    <div className='row-container container'>
       {results.map((row) => <Row
         key={row.id}
         row={row}

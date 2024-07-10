@@ -1,6 +1,5 @@
 import './style.css';
-import { MedQAViewResult } from "./types";
-import { RowInfo } from "../types";
+import { RowInfo, MedQAViewResult } from "../../types";
 
 
 function MedQARowInfoText({ text }: { text: string[] }) {

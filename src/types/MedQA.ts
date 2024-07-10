@@ -1,4 +1,4 @@
-import { ViewResult } from "../types";
+import { ViewResult } from "./container";
 
 export type MedQAPredictionIndex = "A" | "B" | "C" | "D" | "E" | string;
 export type MedQAViewResult = ViewResult & {

@@ -2,7 +2,7 @@ import './style.css';
 import { useState } from "react";
 import RowContainer from "./RowContainer";
 import InfoContainer from "./InfoContainer";
-import { Index, ViewResult, RowInfo } from "../types";
+import { Index, ViewResult, RowInfo } from "../../types";
 
 export default function ResultTable<T>({ results, RowInfo }: {
   results: (ViewResult & T)[],

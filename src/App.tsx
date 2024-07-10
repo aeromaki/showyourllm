@@ -1,7 +1,7 @@
 import './App.css';
-import ResultTable from './components/Containers/ResultTable';
-import MedQARowInfo from './components/MedQA/MedQARowInfo';
-import medQAViewResults from './components/MedQA/data/medQAViewResults';
+import ResultTable from './components/ResultTable';
+import MedQARowInfo from './components/MedQARowInfo';
+import medQAViewResults from './data/medQAViewResults';
 
 function App() {
 

@@ -1,5 +1,6 @@
+import './style.css';
 import { useEffect, useRef } from "react";
-import { ViewResult, RowInfo } from "../types";
+import { ViewResult, RowInfo } from "../../../types";
 
 export default function InfoContainer<T>({ row, RowInfo }: {
   row: (ViewResult & T) | undefined,
@@ -12,7 +13,7 @@ export default function InfoContainer<T>({ row, RowInfo }: {
   }, [row]);
 
   return (
-    <div ref={ref} className='result-container'>
+    <div ref={ref} className='info-container container'>
       {row != undefined ?
         <RowInfo row={row} /> :
         <>select row</>
