@@ -1,0 +1,1 @@
+import medMCQAResults from "./medmcqa_result.json"

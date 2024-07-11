@@ -1,6 +1,7 @@
 import medQAResults from "./medqa_result.json"
-import { MedQAPredictionIndex, MedQAViewResult } from "../../types/MedQA";
+import { MedQAPredictionIndex, MedQAViewResult } from "../../types";
 import { preprocessText } from "../../utils";
+
 
 type MedQAResult = {
   question: string

@@ -3,7 +3,7 @@ import _styles1 from './style.module.css';
 const styles = { ..._styles0, ..._styles1 };
 
 import { useState, useEffect, useRef } from 'react';
-import { Index, SetIndex, ViewResult } from '../../../types'
+import { Index, SetIndex, ViewResult } from '../../../../types'
 
 function Row({ row, index, setIndex }: {
   row: ViewResult,

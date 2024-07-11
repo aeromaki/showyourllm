@@ -7,11 +7,22 @@
     border: 1px solid black;
 }
 
-.row-filter {
-    width: 100%;
-    border: 1px solid gray;
+.result-table {
+    width: 1410px;
 }
 
-.row-and-info>.container {
+.row-filter {
+    width: 100%;
+}
+
+.row-filter button {
+    margin-bottom: 5px;
+}
+
+.row-and-info {
+    display: flex;
+}
+
+.row-and-info>*:first-child {
     margin-right: 10px;
 }

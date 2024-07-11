@@ -3,7 +3,7 @@ import styles from './ResultTable.module.css';
 import { useEffect, useState } from "react";
 import RowContainer from "./RowContainer";
 import InfoContainer from "./InfoContainer";
-import { Index, ViewResult, RowInfo } from "../../types";
+import { Index, ViewResult, RowInfo } from "../../../types";
 
 
 function RowFilter<T extends ViewResult>({ results, setRows, setConv }: {
@@ -30,11 +30,37 @@ function RowFilter<T extends ViewResult>({ results, setRows, setConv }: {
   const showFalseOnly = createOnClick((row: T) => !row.correctness);
   const reset = createOnClick();
 
+  const [b1, setB1] = useState(false);
+  const [b2, setB2] = useState(false);
+  const bStyle1 = (b: boolean) => b ? {
+    backgroundColor: "green",
+    color: "white"
+  } : undefined;
+  const bStyle2 = (b: boolean) => b ? {
+    backgroundColor: "red",
+    color: "white"
+  } : undefined;
+
+  const reset0 = () => {
+    reset();
+    setB1(false);
+    setB2(false);
+  };
+  useEffect(reset0, [results]);
+
   return (
-    <div className={styles['row-filter']}>
-      <button onClick={showTrueOnly}>T</button>
-      <button onClick={showFalseOnly}>F</button>
-      <button onClick={reset}>Reset</button>
+    <div className={`${styles['row-filter']} flex-row`}>
+      <button style={bStyle1(b1)} onClick={() => {
+        showTrueOnly();
+        setB1(true);
+        setB2(false);
+      }}>T</button>
+      <button style={bStyle2(b2)} onClick={() => {
+        showFalseOnly();
+        setB1(false);
+        setB2(true);
+      }}>F</button>
+      <button onClick={() => reset0()}>Reset</button>
     </div>
   );
 }
@@ -47,6 +73,13 @@ export default function ResultTable<T extends ViewResult>({ results, RowInfo }: 
   const [conv, setConv] = useState<Map<number, number> | undefined>();
   const [index, setIndex] = useState<Index>();
   const [row, setRow] = useState<T | undefined>();
+
+  useEffect(() => {
+    setRows(results);
+    setConv(undefined);
+    setIndex(undefined);
+    setRow(undefined);
+  }, [results, RowInfo]);
 
   const getRow = (i: Index) => {
     if (i == undefined) {
@@ -85,13 +118,13 @@ export default function ResultTable<T extends ViewResult>({ results, RowInfo }: 
   }, [index, conv]);
 
   return (
-    <div className='flex-col'>
+    <div className={`${styles['result-table']} flex-col`}>
       <RowFilter
         results={results}
         setRows={setRows}
         setConv={setConv}
       />
-      <div className={`${styles['row-and-info']} flex-row`}>
+      <div className={styles['row-and-info']}>
         <RowContainer rows={rows} index={index} setIndex={setIndex} />
         <InfoContainer row={row} RowInfo={RowInfo} />
       </div>

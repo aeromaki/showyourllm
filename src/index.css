@@ -1,12 +1,13 @@
-.asdf {
-  border: 0.5px solid gray;
-}
-
 body {
   margin: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .flex-col {
@@ -29,4 +30,16 @@ body {
 
 .prevent-select:hover {
   cursor: default;
+}
+
+button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 20px;
+  margin: 5px 0 5px 5px;
+  height: 40px;
+  font-size: 20px;
 }
