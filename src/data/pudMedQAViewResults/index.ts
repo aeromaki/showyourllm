@@ -1,5 +1,6 @@
 import pubMedQAResults from "./pubmedqa_result.json"
 import { PubMedQAPrediction, PubMedQAViewResult } from "../../types";
+import { preprocessText } from "../../utils";
 
 
 type PubMedQAResult = {
@@ -37,7 +38,7 @@ function convertPubMedQAResultToView(res: PubMedQAResult, i: number): PubMedQAVi
 
     contexts: res.CONTEXTS,
     labels: res.LABELS,
-    reasoning: res.reasoning
+    reasoning: preprocessText(res.reasoning)
   }
 };
 

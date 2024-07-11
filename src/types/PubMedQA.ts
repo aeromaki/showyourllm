@@ -12,5 +12,5 @@ export type PubMedQAViewResult = ViewResult & {
 
   contexts: string[]
   labels: string[]
-  reasoning: string
+  reasoning: string[]
 };

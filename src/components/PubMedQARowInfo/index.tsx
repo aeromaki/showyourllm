@@ -11,6 +11,26 @@ function PubMedQARowInfoText({ text }: { text: string }) {
   );
 }
 
+function PubMedQARowInfoTextLines({ text }: { text: string[] }) {
+  try {
+    return (
+      <div className={styles['info-text']}>
+        {text.map((l, i) =>
+          <p key={i} style={{
+            textDecoration:
+              l[l.length - 1] == "?" ? "underline" : "none"
+          }}>
+            {l}
+          </p>
+        )}
+      </div>
+    );
+  }
+  catch {
+    return (<></>);
+  }
+}
+
 function PubMedQARowInfoOptions() {
   const idxs = [["A", "yes"], ["B", "no"], ["C", "maybe"]];
   return (
@@ -56,7 +76,7 @@ const PubMedQARowInfo: RowInfo<PubMedQAViewResult> = function ({ row }: { row: P
       </table>
 
       <h3>Reasoning</h3>
-      <PubMedQARowInfoText text={row.reasoning} />
+      <PubMedQARowInfoTextLines text={row.reasoning} />
     </div>
   );
 };
