@@ -1,16 +1,20 @@
 import styles from './style.module.css';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import medQAViewResults from "../../data/medQAViewResults";
 import pubMedQAViewResults from '../../data/pudMedQAViewResults';
+import medMCQAViewResults from '../../data/medMCQAViewResults';
 import MedQARowInfo from "../MedQARowInfo";
 import PubMedQARowInfo from '../PubMedQARowInfo';
+import MedMCQARowInfo from '../MedMCQARowInfo';
+
 import ResultTable from "./ResultTable";
 import { ViewResult, RowInfo } from '../../types';
 
 const resultss: [ViewResult[], RowInfo<ViewResult & any>][] = [
     [medQAViewResults, MedQARowInfo],
-    [pubMedQAViewResults, PubMedQARowInfo]
+    [pubMedQAViewResults, PubMedQARowInfo],
+    [medMCQAViewResults, MedMCQARowInfo]
 ];
 
 export default function ResultBoard() {
@@ -30,7 +34,7 @@ export default function ResultBoard() {
                     setB(1);
                 }}>PubMedQA</button>
                 <button style={bStyle(b == 2)} onClick={() => {
-                    //setB(2);
+                    setB(2);
                 }}>MedMCQA</button>
             </div>
             <ResultTable results={resultss[b][0]} RowInfo={resultss[b][1]} />
