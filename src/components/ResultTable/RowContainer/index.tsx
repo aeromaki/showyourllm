@@ -64,11 +64,11 @@ function Row({ row, index, setIndex }: {
       </div>
       <div className={styles['row-q']}>{row.display}</div>
     </div>
-  )
+  );
 }
 
-export default function RowContainer<T>({ results, index, setIndex }: {
-  results: (ViewResult & T)[],
+export default function RowContainer<T extends ViewResult>({ rows, index, setIndex }: {
+  rows: T[],
   index: Index,
   setIndex: SetIndex
 }) {
@@ -82,7 +82,7 @@ export default function RowContainer<T>({ results, index, setIndex }: {
           e.preventDefault();
 
           const scrollDown = (i: Index) => {
-            const canScroll = (i != undefined) && (i < results.length - 1);
+            const canScroll = (i != undefined) && (i < rows.length - 1);
             return canScroll ? (i + 1) : i;
           };
 
@@ -110,12 +110,12 @@ export default function RowContainer<T>({ results, index, setIndex }: {
 
   return (
     <div className={`${styles['row-container']} ${styles.container}`}>
-      {results.map((row) => <Row
+      {rows.map((row) => <Row
         key={row.id}
         row={row}
         index={index}
         setIndex={setIndex}
       />)}
     </div>
-  )
+  );
 }

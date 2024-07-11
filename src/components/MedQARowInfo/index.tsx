@@ -1,4 +1,5 @@
 import styles from './style.module.css';
+
 import { RowInfo, MedQAViewResult } from "../../types";
 
 
@@ -14,7 +15,7 @@ function MedQARowInfoText({ text }: { text: string[] }) {
         </p>
       )}
     </div>
-  )
+  );
 }
 
 function MedQARowInfoOptions({ options }: {
@@ -41,7 +42,7 @@ function MedQARowInfoOptions({ options }: {
         }</>
       </tbody>
     </table>
-  )
+  );
 }
 
 const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAViewResult }) {
@@ -73,7 +74,7 @@ const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAVi
       <h3>Reasoning</h3>
       <MedQARowInfoText text={row.reasoning} />
     </div>
-  )
+  );
 };
 
 export default MedQARowInfo;

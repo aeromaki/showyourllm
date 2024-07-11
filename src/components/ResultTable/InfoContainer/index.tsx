@@ -5,8 +5,8 @@ const styles = { ..._styles0, ..._styles1 };
 import { useEffect, useRef } from "react";
 import { ViewResult, RowInfo } from "../../../types";
 
-export default function InfoContainer<T>({ row, RowInfo }: {
-  row: (ViewResult & T) | undefined,
+export default function InfoContainer<T extends ViewResult>({ row, RowInfo }: {
+  row: T | undefined,
   RowInfo: RowInfo<T>
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,5 +22,5 @@ export default function InfoContainer<T>({ row, RowInfo }: {
         <>select row</>
       }
     </div>
-  )
+  );
 }

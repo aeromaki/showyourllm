@@ -7,6 +7,6 @@ export interface ViewResult {
   correctness: boolean;
 };
 
-export type RowInfo<T> = ({ row }: {
-  row: ViewResult & T
+export type RowInfo<T extends ViewResult> = ({ row }: {
+  row: T
 }) => JSX.Element;

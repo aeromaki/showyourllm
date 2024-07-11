@@ -54,4 +54,5 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    pointer-events: none;
 }

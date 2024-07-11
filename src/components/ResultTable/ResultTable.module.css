@@ -6,3 +6,12 @@
     overflow-y: scroll;
     border: 1px solid black;
 }
+
+.row-filter {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+.row-and-info>.container {
+    margin-right: 10px;
+}
