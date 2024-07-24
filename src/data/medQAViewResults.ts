@@ -34,7 +34,7 @@ function convertMedQAResultToView(res: MedQAResult, i: number): MedQAViewResult 
 async function loadMedQAViewResults(src: string): Promise<MedQAViewResult[]> {
   return await fetch(src)
     .then(res => res.json())
-    .then(res => res.data.map(convertMedQAResultToView))
+    .then(res => res.map(convertMedQAResultToView))
     .catch(err => console.log(err));
 }
 
