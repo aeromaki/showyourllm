@@ -1,3 +1,7 @@
+* {
+  font-family: 'Times New Roman', Times, serif;
+}
+
 body {
   margin: 0;
   width: 100vw;
@@ -37,9 +41,19 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid black;
   border-radius: 50px;
   padding: 20px;
   margin: 5px 0 5px 5px;
   height: 40px;
   font-size: 20px;
+  background-color: #EEEEEE;
+}
+
+button:hover {
+  background-color: #DDDDDD;
+}
+
+button:active {
+  background-color: #CCCCCC;
 }

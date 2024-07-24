@@ -8,7 +8,7 @@ export type MedQAViewResult = ViewResult & {
 
   Q: string[]
   A0: MedQAPredictionIndex
-  Am: MedQAPredictionIndex
+  Am: MedQAPredictionIndex | null
   As: {
     A: string
     B: string

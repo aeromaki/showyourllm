@@ -1,41 +1,33 @@
-import styles from './style.module.css';
+import styles from './styles.module.css';
 
 import { useState } from 'react';
-import medQAViewResults from "../../data/medQAViewResults";
-import pubMedQAViewResults from '../../data/pudMedQAViewResults';
-import medMCQAViewResults from '../../data/medMCQAViewResults';
+import { medQAGPT35ViewResults, medQAMeerkatViewResults } from "../../data/medQAViewResults";
 import MedQARowInfo from "../MedQARowInfo";
-import PubMedQARowInfo from '../PubMedQARowInfo';
-import MedMCQARowInfo from '../MedMCQARowInfo';
 
 import ResultTable from "./ResultTable";
 import { ViewResult, RowInfo } from '../../types';
 
 const resultss: [ViewResult[], RowInfo<ViewResult & any>][] = [
-    [medQAViewResults, MedQARowInfo],
-    [pubMedQAViewResults, PubMedQARowInfo],
-    [medMCQAViewResults, MedMCQARowInfo]
+    [medQAGPT35ViewResults, MedQARowInfo],
+    [medQAMeerkatViewResults, MedQARowInfo]
 ];
 
 export default function ResultBoard() {
-    const [b, setB] = useState<0 | 1 | 2>(0);
+    const [b, setB] = useState<0 | 1>(0);
 
     const bStyle = (b: boolean) => b ? {
-        backgroundColor: "#EEEEEE",
+        backgroundColor: "white",
     } : undefined;
 
     return (
-        <div>
+        <div className={styles['result-board']}>
             <div className={`${styles['button-bar']} flex-row`}>
                 <button style={bStyle(b == 0)} onClick={() => {
                     setB(0);
-                }}>MedQA</button>
+                }}>GPT-3.5</button>
                 <button style={bStyle(b == 1)} onClick={() => {
                     setB(1);
-                }}>PubMedQA</button>
-                <button style={bStyle(b == 2)} onClick={() => {
-                    setB(2);
-                }}>MedMCQA</button>
+                }}>Meerkat</button>
             </div>
             <ResultTable results={resultss[b][0]} RowInfo={resultss[b][1]} />
         </div>

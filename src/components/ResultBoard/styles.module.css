@@ -1,0 +1,14 @@
+.result-board {
+    display: flex;
+    flex-direction: column;
+    width: min(100vw, 1200px);
+    height: min(100vh, 900px);
+}
+
+.button-bar {
+    width: 100%;
+}
+
+.button-bar button {
+    margin-bottom: 0;
+}

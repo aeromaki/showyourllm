@@ -1,5 +1,5 @@
 import _styles0 from '../ResultTable.module.css';
-import _styles1 from './style.module.css';
+import _styles1 from './styles.module.css';
 const styles = { ..._styles0, ..._styles1 };
 
 import { useState, useEffect, useRef } from 'react';

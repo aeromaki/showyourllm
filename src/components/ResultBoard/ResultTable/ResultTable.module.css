@@ -1,14 +1,15 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 700px;
-    height: 1200px;
+    width: 50%;
+    height: calc(100% - 50px);
     overflow-y: scroll;
     border: 1px solid black;
 }
 
 .result-table {
-    width: 1410px;
+    width: 100%;
+    height: calc(100% - 50px);
 }
 
 .row-filter {
@@ -21,8 +22,26 @@
 
 .row-and-info {
     display: flex;
+    width: 100%;
+    height: inherit;
+    justify-content: space-between;
 }
 
-.row-and-info>*:first-child {
-    margin-right: 10px;
+.row-and-info>*+* {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .row-and-info {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .row-and-info>*+* {
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }

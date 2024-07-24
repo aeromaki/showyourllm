@@ -1,4 +1,4 @@
-import styles from './style.module.css';
+import styles from './styles.module.css';
 
 import { RowInfo, MedQAViewResult } from "../../types";
 
@@ -77,7 +77,7 @@ const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAVi
                 <h3>Prediction</h3>
                 <p style={{
                   color: row.A0 == row.Am ? "green" : "red"
-                }}>{row.Am}</p>
+                }}>{row.Am ?? "parse failed"}</p>
               </th>
             </tr>
           </tbody>

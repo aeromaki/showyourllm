@@ -1,11 +1,11 @@
-import medQAResults from "./medqa_result.json"
+import medQAGPT35Results from "./MedQA_GPT35_3shot_200.json"
+import medQAMeerkatResults from "./MedQA_Meerkat8B_3shot_200_postprocessed.json"
 import { MedQAPredictionIndex, MedQAViewResult } from "../../types";
 import { preprocessText } from "../../utils";
 
 
-type MedQAResult = {
+interface MedQAResult {
   question: string
-  answer: string
   options: {
     A: string
     B: string
@@ -13,30 +13,29 @@ type MedQAResult = {
     D: string
     E: string
   }
-  meta_info: string
-  answer_idx: MedQAPredictionIndex
-  reasoning: string
-  "model chosen": string
-  correctness: boolean
+  output: string
+  prediction: MedQAPredictionIndex | null
+  label: MedQAPredictionIndex
 }
 
-function convertRawPredToIndex(modelChosen: string): MedQAPredictionIndex {
-  return modelChosen[0];
-}
 
 function convertMedQAResultToView(res: MedQAResult, i: number): MedQAViewResult {
   return {
     id: i,
     display: res.question,
-    correctness: res.correctness,
+    correctness: res.prediction == res.label,
 
     Q: preprocessText(res.question),
-    A0: res.answer_idx,
-    Am: convertRawPredToIndex(res["model chosen"]),
+    A0: res.label,
+    Am: res.prediction,
     As: res.options,
-    reasoning: preprocessText(res.reasoning),
+    reasoning: preprocessText(res.output),
   }
 }
 
-const medQAViewResults = medQAResults.map(convertMedQAResultToView);
-export default medQAViewResults;
+
+const medQAGPT35ViewResults = medQAGPT35Results.map(convertMedQAResultToView);
+const medQAMeerkatViewResults = medQAMeerkatResults.map(convertMedQAResultToView);
+
+
+export { medQAGPT35ViewResults, medQAMeerkatViewResults };
