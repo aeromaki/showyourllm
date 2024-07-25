@@ -1,7 +1,7 @@
 export function preprocessText(text: string): string[] {
   const lines = text.replace(
-    /[.][ ][A-Z]/g,
-    str => `.\n${str[str.length - 1]}`
+    /[a-z][.][ ][A-Z]/g,
+    str => `${str[str.length - 4]}.\n${str[str.length - 1]}`
   ).split('\n');
 
   const lastLine = lines[lines.length - 1];
