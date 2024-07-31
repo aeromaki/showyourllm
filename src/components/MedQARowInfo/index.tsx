@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 
 import { RowInfo, MedQAViewResult } from "../../types";
+import { SetStateAction, useEffect, useState } from 'react';
 
 
 function MedQARowInfoText({ text }: { text: string[] }) {
@@ -56,7 +57,62 @@ function MedQARowInfoOptions({ options }: {
   }
 }
 
-const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAViewResult }) {
+function MedQARowLabel({ rad, setRad }: {
+  rad: boolean[],
+  setRad: React.Dispatch<SetStateAction<boolean[]>>,
+  //text: string,
+  //setText: React.Dispatch<SetStateAction<string>>
+}) {
+  return (
+    <>
+      <table className={styles['info-options']}>
+        <tbody style={{ color: 'black', fontSize: '15px' }}>
+          <tr>
+            <th><input type='radio' checked={rad[0]} readOnly={true} onClick={() => {
+              setRad(r => [!r[0], r[1], r[2], r[3]]);
+            }} /></th>
+            <th>1. Incorrect knowledge</th>
+          </tr>
+          <tr>
+            <th><input type='radio' checked={rad[1]} readOnly={true} onClick={() => {
+              setRad(r => [r[0], !r[1], r[2], r[3]]);
+            }} /></th>
+            <th>2. Incorrect linking of knowledge/information</th>
+          </tr>
+          <tr>
+            <th><input type='radio' checked={rad[2]} readOnly={true} onClick={() => {
+              setRad(r => [r[0], r[1], !r[2], r[3]]);
+            }} /></th>
+            <th>3. Some information in the question was ignored</th>
+          </tr>
+          <tr>
+            <th><input type='radio' checked={rad[3]} readOnly={true} onClick={() => {
+              setRad(r => [r[0], r[1], r[2], !r[3]]);
+            }} /></th>
+            <th>4. else</th>
+          </tr>
+        </tbody>
+      </table>
+      {/*
+      <textarea onChange={e => setText(e.target.value)} />
+      */}
+    </>
+  )
+}
+
+const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row, initRad, save }: {
+  row: MedQAViewResult,
+  initRad: boolean[] | null,
+  save: (id: number, rad: boolean[]) => void
+}) {
+
+  const [rad, setRad] = useState<boolean[]>([false, false, false, false]);
+  // const [text, setText] = useState("");
+
+  useEffect(() => {
+    setRad(initRad ? initRad : [false, false, false, false]);
+  }, [row, initRad]);
+
   try {
     return (
       <div className={styles['info']}>
@@ -85,6 +141,21 @@ const MedQARowInfo: RowInfo<MedQAViewResult> = function ({ row }: { row: MedQAVi
 
         <h3>Reasoning</h3>
         <MedQARowInfoText text={row.reasoning} />
+
+        {
+          !row.correctness ?
+            <>
+              <h3>Why wrong?</h3>
+              <MedQARowLabel rad={rad} setRad={setRad} /> {/* text={text} setText={setText} /> */}
+              <button style={{ marginTop: '30px' }} onClick={() => {
+                if (rad.reduce((a, b) => a || b)) {
+                  save(row.id, rad);
+                } else {
+                  alert("select at least one!");
+                }
+              }}>save</button>
+            </> : <></>
+        }
       </div>
     );
   }

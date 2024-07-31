@@ -8,5 +8,7 @@ export interface ViewResult {
 };
 
 export type RowInfo<T extends ViewResult> = ({ row }: {
-  row: T
+  row: T,
+  initRad: boolean[] | null,
+  save: (id: number, rad: boolean[]) => void
 }) => JSX.Element;

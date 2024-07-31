@@ -1,6 +1,6 @@
 import styles from './ResultTable.module.css';
 
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import RowContainer from "./RowContainer";
 import InfoContainer from "./InfoContainer";
 import { Index, ViewResult, RowInfo } from "../../../types";
@@ -65,9 +65,11 @@ function RowFilter<T extends ViewResult>({ results, setRows, setConv }: {
   );
 }
 
-export default function ResultTable<T extends ViewResult>({ results, RowInfo }: {
+export default function ResultTable<T extends ViewResult>({ results, RowInfo, res, setRes }: {
   results: T[],
-  RowInfo: RowInfo<T>
+  RowInfo: RowInfo<T>,
+  res: (boolean[] | null)[],
+  setRes: React.Dispatch<SetStateAction<(boolean[] | null)[]>>
 }) {
   const [rows, setRows] = useState<T[]>(results);
   const [conv, setConv] = useState<Map<number, number> | undefined>();
@@ -117,6 +119,14 @@ export default function ResultTable<T extends ViewResult>({ results, RowInfo }: 
     setRow(newRow);
   }, [index, conv]);
 
+  const save = (id: number, rad: boolean[]) => {
+    setRes(s => {
+      let ss = s;
+      ss[id] = rad;
+      return ss;
+    });
+  }
+
   return (
     <div className={`${styles['result-table']} flex-col`}>
       <RowFilter
@@ -125,8 +135,8 @@ export default function ResultTable<T extends ViewResult>({ results, RowInfo }: 
         setConv={setConv}
       />
       <div className={styles['row-and-info']}>
-        <RowContainer rows={rows} index={index} setIndex={setIndex} />
-        <InfoContainer row={row} RowInfo={RowInfo} />
+        <RowContainer rows={rows} res={res} index={index} setIndex={setIndex} />
+        <InfoContainer row={row} initRad={row ? res[row.id] : null} save={save} RowInfo={RowInfo} />
       </div>
     </div>
   );

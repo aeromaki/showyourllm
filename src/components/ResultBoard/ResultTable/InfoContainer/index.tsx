@@ -5,8 +5,10 @@ const styles = { ..._styles0, ..._styles1 };
 import { useEffect, useRef } from "react";
 import { ViewResult, RowInfo } from "../../../../types";
 
-export default function InfoContainer<T extends ViewResult>({ row, RowInfo }: {
+export default function InfoContainer<T extends ViewResult>({ row, initRad, save, RowInfo }: {
   row: T | undefined,
+  initRad: boolean[] | null,
+  save: (id: number, rad: boolean[]) => void,
   RowInfo: RowInfo<T>
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,7 +20,7 @@ export default function InfoContainer<T extends ViewResult>({ row, RowInfo }: {
   return (
     <div ref={ref} className={`${styles["info-container"]} ${styles.container}`}>
       {row != undefined ?
-        <RowInfo row={row} /> :
+        <RowInfo row={row} initRad={initRad} save={save} /> :
         <>select row</>
       }
     </div>

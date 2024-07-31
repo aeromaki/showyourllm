@@ -5,17 +5,22 @@ const styles = { ..._styles0, ..._styles1 };
 import { useState, useEffect, useRef } from 'react';
 import { Index, SetIndex, ViewResult } from '../../../../types'
 
-function Row({ row, index, setIndex }: {
+function Row({ row, done, index, setIndex }: {
   row: ViewResult,
+  done: boolean,
   index: Index,
   setIndex: SetIndex
 }) {
   const isSelected = row.id == index;
   const rowStyle = isSelected ? {
-    borderColor: "lightgray",
+    borderColor: done ? "green" : "lightgray",
+    borderWidth: done ? "3px" : undefined,
     backgroundColor: row.correctness ? "green" : "red",
     color: "white"
-  } : undefined;
+  } : {
+    borderColor: done ? "green" : undefined,
+    borderWidth: done ? "3px" : undefined
+  };
   const borderRightStyle = isSelected ? { borderColor: "lightgray" } : undefined;
   const correctnessColor = (() => {
     let color;
@@ -67,8 +72,9 @@ function Row({ row, index, setIndex }: {
   );
 }
 
-export default function RowContainer<T extends ViewResult>({ rows, index, setIndex }: {
+export default function RowContainer<T extends ViewResult>({ rows, res, index, setIndex }: {
   rows: T[],
+  res: (boolean[] | null)[],
   index: Index,
   setIndex: SetIndex
 }) {
@@ -112,6 +118,7 @@ export default function RowContainer<T extends ViewResult>({ rows, index, setInd
     <div className={`${styles['row-container']} ${styles.container}`}>
       {rows.map((row) => <Row
         key={row.id}
+        done={res[row.id] != null}
         row={row}
         index={index}
         setIndex={setIndex}
