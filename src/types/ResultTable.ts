@@ -7,6 +7,10 @@ export interface ViewResult {
   correctness: boolean;
 };
 
+export interface Surv {
+  rad: boolean[] | null
+};
+
 export type RowInfo<T extends ViewResult> = ({ row }: {
   row: T,
   initRad: boolean[] | null,

@@ -65,11 +65,12 @@ function RowFilter<T extends ViewResult>({ results, setRows, setConv }: {
   );
 }
 
-export default function ResultTable<T extends ViewResult>({ results, RowInfo, res, setRes }: {
+export default function ResultTable<T extends ViewResult>({ results, RowInfo, res, setRes, store }: {
   results: T[],
   RowInfo: RowInfo<T>,
   res: (boolean[] | null)[],
-  setRes: React.Dispatch<SetStateAction<(boolean[] | null)[]>>
+  setRes: React.Dispatch<SetStateAction<(boolean[] | null)[]>>,
+  store: () => void
 }) {
   const [rows, setRows] = useState<T[]>(results);
   const [conv, setConv] = useState<Map<number, number> | undefined>();
@@ -125,6 +126,7 @@ export default function ResultTable<T extends ViewResult>({ results, RowInfo, re
       ss[id] = rad;
       return ss;
     });
+    store();
   }
 
   return (

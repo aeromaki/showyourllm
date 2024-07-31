@@ -7,12 +7,13 @@ import MedQARowInfo from "../MedQARowInfo";
 import ResultTable from "./ResultTable";
 import { ViewResult, RowInfo } from '../../types';
 
+const L = 71;
+
 export default function ResultBoard() {
     const [b, setB] = useState<0 | 1>(0);
 
     const [resultss, setResultss] = useState<[ViewResult[], RowInfo<ViewResult & any>][]>([]);
 
-    const L = 200;
     const [res, setRes] = useState<(boolean[] | null)[]>(Array(L).map(_ => null));
     const [res1, setRes1] = useState<(boolean[] | null)[]>(Array(L).map(_ => null));
     const rr = [res, res1];
@@ -21,16 +22,35 @@ export default function ResultBoard() {
     useEffect(() => {
         const fetchData = async () => {
             setResultss([
-                [await loadMedQAGPT35ViewResults(), MedQARowInfo],
-                [await loadMedQAMeerkatViewResults(), MedQARowInfo]
+                [(await loadMedQAGPT35ViewResults()).slice(0, L), MedQARowInfo],
+                [(await loadMedQAMeerkatViewResults()).slice(0, L), MedQARowInfo]
             ]);
         };
         fetchData();
+        try {
+            const data = localStorage.getItem("showyourllm");
+            if (data) {
+                const prog = JSON.parse(data);
+                setRes(prog.gpt);
+                setRes1(prog.meerkat);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     }, [])
 
     const bStyle = (b: boolean) => b ? {
         backgroundColor: "white",
     } : undefined;
+
+    const store = () => {
+        const json = JSON.stringify({
+            gpt: res,
+            meerkat: res1
+        });
+        console.log("hi")
+        localStorage.setItem("showyourllm", json);
+    };
 
     const saveProgress = () => {
         const json = JSON.stringify({
@@ -79,7 +99,7 @@ export default function ResultBoard() {
             </div>
             {
                 resultss.length > 0 ?
-                    <ResultTable results={resultss[b][0]} RowInfo={resultss[b][1]} res={rr[b]} setRes={rr2[b]} /> : <></>
+                    <ResultTable results={resultss[b][0]} RowInfo={resultss[b][1]} res={rr[b]} setRes={rr2[b]} store={store} /> : <></>
             }
         </div>
     );
